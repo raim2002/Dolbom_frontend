@@ -1,9 +1,10 @@
 .element {
-    align-items: start;
-    background-color: #ffffff;
-    display: grid;
-    justify-items: center;
-    width: 100vw;
+    align-items: center; /* 세로 중앙 정렬 */
+  background-color: #f0f2f5; /* 연한 회색 배경으로 변경 */
+  display: grid;
+  justify-items: center; /* 가로 중앙 정렬 */
+  width: 100vw;
+  min-height: 100vh; /* 최소 높이를 화면 전체로 설정 */
 }
 
 .element .div {
@@ -165,4 +166,21 @@
   line-height: 36px;
   white-space: nowrap;
   /* height, left, top, position 속성 제거 */
+}
+
+.inputElement {
+  width: 100%;
+  height: 100%;
+  border: none;
+  outline: none;
+  background-color: transparent;
+  font-family: "Inter-Regular", Helvetica;
+  font-size: 14px;
+  padding: 0;
+  margin: 0;
+}
+
+.link {
+  text-decoration: none; /* Removes underline from the link */
+  width: 100%;
 }
