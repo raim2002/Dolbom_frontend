@@ -1,0 +1,147 @@
+/* src/pages/DashboardPage/DashboardPage.css */
+.screen {
+    align-items: start;
+    background-color: #f0f2f5; /* 배경색 회색으로 유지 */
+    display: grid;
+    justify-items: center;
+    width: 100vw;
+    min-height: 100vh;
+    align-items: center;
+}
+
+.screen .div {
+    background-color: #ffffff;
+    height: 917px;
+    position: relative;
+    width: 412px;
+}
+
+.screen .text-wrapper {
+    color: #000000;
+    font-family: "Inter-SemiBold", Helvetica;
+    font-size: 24px;
+    font-weight: 600;
+    height: 36px;
+    left: 42px;
+    letter-spacing: -0.24px;
+    line-height: 36px;
+    position: absolute;
+    top: 70px;
+    white-space: nowrap;
+}
+
+.screen .frame {
+    /* Figma의 불필요한 테두리 제거 */
+    height: 738px;
+    left: 7px;
+    position: absolute;
+    top: 133px;
+    width: 397px;
+}
+
+.screen .field,
+.screen .label-wrapper,
+.screen .div-wrapper,
+.screen .field-2,
+.screen .field-3,
+.screen .field-4 {
+    border: 1px solid #dfdfdf;
+    border-radius: 20px;
+    background-color: #ffffff;
+    position: absolute;
+    box-sizing: border-box;
+}
+
+.screen .field {
+    height: 126px;
+    left: 0;
+    top: 181px;
+    width: 185px;
+}
+
+.screen .label {
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 1;
+    color: #828282;
+    display: -webkit-box;
+    font-family: "Inter-Regular", Helvetica;
+    font-size: 14px;
+    font-weight: 400;
+    left: 20px;
+    letter-spacing: 0;
+    line-height: 19.6px;
+    overflow: hidden;
+    position: absolute;
+    text-overflow: ellipsis;
+    top: 21px;
+    width: 70px;
+}
+
+.screen .label-wrapper {
+    height: 126px;
+    left: 0;
+    top: 327px;
+    width: 185px;
+}
+
+.screen .div-wrapper {
+    height: 126px;
+    left: 212px;
+    top: 181px;
+    width: 185px;
+}
+
+.screen .field-2 {
+    background-color: #e6e6e6;
+    height: 102px;
+    left: 133px;
+    top: 539px;
+    width: 132px;
+    cursor: pointer; /* 클릭 가능한 느낌을 주기 위해 커서 변경 */
+}
+
+.screen .text-wrapper-2 {
+    color: #000000;
+    font-family: "Inter-Regular", Helvetica;
+    font-size: 24px;
+    font-weight: 400;
+    left: 40px;
+    letter-spacing: 0;
+    line-height: 33.6px;
+    position: absolute;
+    top: 32px;
+    white-space: nowrap;
+    width: 54px;
+}
+
+.screen .field-3 {
+    height: 126px;
+    left: 10px;
+    top: 16px;
+    width: 377px;
+}
+
+.screen .label-2 {
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 1;
+    color: #828282;
+    display: -webkit-box;
+    font-family: "Inter-Regular", Helvetica;
+    font-size: 14px;
+    font-weight: 400;
+    left: 137px;
+    letter-spacing: 0;
+    line-height: 19.6px;
+    overflow: hidden;
+    position: absolute;
+    text-overflow: ellipsis;
+    top: 9px;
+    width: 103px;
+}
+
+.screen .field-4 {
+    height: 126px;
+    left: 212px;
+    top: 327px;
+    width: 185px;
+}

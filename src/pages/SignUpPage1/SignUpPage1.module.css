@@ -1,0 +1,168 @@
+.element {
+    align-items: start;
+    background-color: #ffffff;
+    display: grid;
+    justify-items: center;
+    width: 100vw;
+}
+
+.element .div {
+    background-color: #ffffff;
+    height: 917px;
+    position: relative;
+    width: 412px;
+}
+
+.element .overlap-group {
+    height: 481px;
+    left: 18px;
+    position: absolute;
+    top: 391px;
+    width: 375px;
+}
+
+.element .content {
+    align-items: center;
+    display: inline-flex;
+    flex-direction: column;
+    gap: 24px;
+    height: 481px;
+    left: 0;
+    padding: 0px 24px;
+    position: absolute;
+    top: 0;
+}
+
+.element .input-button {
+    align-items: flex-start;
+  display: flex;
+  flex: 0 0 auto;
+  flex-direction: column; /* 자식들을 세로로 쌓도록 함 */
+  gap: 16px; /* 자식들 사이에 16px 간격을 줌 */
+  position: relative;
+  width: 327px;
+}
+
+.element .field {
+    align-items: center;
+  align-self: stretch;
+  background-color: #ffffff;
+  border: 1px solid;
+  border-color: #dfdfdf;
+  border-radius: 8px;
+  box-sizing: border-box; /* 너비 문제 방지 */
+  display: flex;
+  gap: 16px;
+  height: 40px;
+  padding: 8px 16px;
+  position: relative;
+  width: 100%;
+}
+
+.element .label {
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 1;
+    line-clamp: 1;
+    color: #828282;
+    display: -webkit-box;
+    flex: 1;
+    font-family: "Inter-Regular", Helvetica;
+    font-size: 14px;
+    font-weight: 400;
+    letter-spacing: 0;
+    line-height: 19.6px;
+    overflow: hidden;
+    position: relative;
+    text-overflow: ellipsis;
+}
+
+.element .label-wrapper {
+    align-items: center;
+  align-self: stretch; /* 부모 너비에 맞게 꽉 채움 */
+  background-color: #ffffff;
+  border: 1px solid;
+  border-color: #dfdfdf;
+  border-radius: 8px;
+  box-sizing: border-box; /* 너비 문제 방지 */
+  display: flex;
+  gap: 16px;
+  height: 40px;
+  padding: 8px 16px;
+  position: relative;
+  width: 100%;
+}
+
+.element .buttons {
+    height: 40px;
+    left: 24px;
+    position: absolute;
+    top: 346px;
+    width: 327px;
+}
+
+.element .button {
+    all: unset;
+  background-color: #eeeeee;
+  border-radius: 8px;
+  box-sizing: border-box;
+  height: 40px;
+  width: 100%; /* 부모 너비에 꽉 채우기 */
+  
+  /* --- Flexbox 중앙 정렬 --- */
+  display: flex;
+  justify-content: center; /* 가로 중앙 */
+  align-items: center;    /* 세로 중앙 */
+  /* ----------------------- */
+}
+
+.element .div-wrapper {
+    align-items: center;
+  display: inline-flex;
+  gap: 8px;
+  position: relative;
+}
+
+.element .text-wrapper {
+    color: #000000;
+    font-family: "Inter-Medium", Helvetica;
+    font-size: 14px;
+    font-weight: 500;
+    letter-spacing: 0;
+    line-height: 19.6px;
+    margin-top: -1.00px;
+    position: relative;
+    white-space: nowrap;
+    width: fit-content;
+}
+.header-group {
+  position: absolute;
+  top: 70px;
+  left: 42px;
+  display: flex;
+  flex-direction: column; /* 세로로 쌓기 */
+  align-items: flex-start; /* 왼쪽 정렬 */
+  gap: 8px; /* 두 텍스트 사이의 간격 */
+}
+
+/* 기존 스타일에서 위치(position, left, top 등) 관련 코드 제거 */
+.text-wrapper-2 {
+  color: #000000;
+  font-family: "Inter-Medium", Helvetica;
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: -0.13px;
+  line-height: 19.5px;
+  white-space: nowrap;
+  /* height, left, top, position 속성 제거 */
+}
+
+.text-wrapper-3 {
+  color: #000000;
+  font-family: "Inter-SemiBold", Helvetica;
+  font-size: 24px;
+  font-weight: 600;
+  letter-spacing: -0.24px;
+  line-height: 36px;
+  white-space: nowrap;
+  /* height, left, top, position 속성 제거 */
+}

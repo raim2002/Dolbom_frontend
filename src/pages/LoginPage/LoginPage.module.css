@@ -1,0 +1,205 @@
+.screen {
+    align-items: start;
+    background-color: #c4c0c0;
+    display: grid;
+    justify-items: center;
+    width: 100vw;
+    /* 모바일 화면이 세로로도 가운데 오도록 추가하면 더 좋습니다 */
+    min-height: 100vh;
+    align-items: center;
+}
+
+.screen .div {
+    background-color: #ffffff;
+    height: 917px;
+    position: relative;
+    width: 412px;
+}
+
+.screen .content {
+    align-items: center;
+    display: inline-flex;
+    flex-direction: column;
+    gap: 24px;
+    left: 18px;
+    padding: 0px 24px;
+    position: absolute;
+    top: 375px;
+}
+
+.screen .input-button {
+    align-items: flex-start;
+    display: flex;
+    flex: 0 0 auto;
+    flex-direction: column;
+    gap: 16px;
+    position: relative;
+    width: 327px;
+}
+
+.screen .field {
+    align-items: center;
+    align-self: stretch;
+    background-color: #ffffff;
+    border: 1px solid;
+    border-color: #dfdfdf;
+    border-radius: 8px;
+    display: flex;
+    gap: 16px;
+    height: 40px;
+    padding: 8px 16px;
+    position: relative;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.screen .label {
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 1;
+    color: #828282;
+    display: -webkit-box;
+    flex: 1;
+    font-family: "Inter-Regular", Helvetica;
+    font-size: 14px;
+    font-weight: 400;
+    letter-spacing: 0;
+    line-height: 19.6px;
+    overflow: hidden;
+    position: relative;
+    text-overflow: ellipsis;
+}
+
+.screen .label-wrapper {
+    align-items: center;
+    background-color: #ffffff;
+    border: 1px solid;
+    border-color: #dfdfdf;
+    border-radius: 8px;
+    display: flex;
+    gap: 16px;
+    height: 40px;
+    padding: 8px 16px;
+    position: relative;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.screen .button {
+    all: unset;
+    align-items: center;
+    align-self: stretch;
+    background-color: #000000;
+    border-radius: 8px;
+    box-sizing: border-box;
+    display: flex;
+    gap: 8px;
+    height: 40px;
+    justify-content: center;
+    padding: 0px 16px;
+    position: relative;
+    width: 100%;
+}
+
+.screen .text-wrapper {
+    color: #ffffff;
+    font-family: "Inter-Medium", Helvetica;
+    font-size: 14px;
+    font-weight: 500;
+    letter-spacing: 0;
+    line-height: 19.6px;
+    position: relative;
+    white-space: nowrap;
+    width: fit-content;
+}
+
+.screen .divider {
+    align-items: center;
+    display: flex;
+    flex: 0 0 auto;
+    gap: 8px;
+    justify-content: center;
+    position: relative;
+    width: 327px;
+}
+
+.screen .divider-2 {
+    background-color: #e6e6e6;
+    height: 1px;
+    position: relative;
+    width: 278px;
+}
+
+.screen .buttons {
+    height: 40px;
+    position: relative;
+    width: 327px;
+}
+
+.screen .div-wrapper {
+    all: unset;
+    background-color: #eeeeee;
+    border-radius: 8px;
+    box-sizing: border-box;
+    height: 40px;
+
+    width: 100%; /* 1. 너비를 100%로 꽉 채웁니다. */
+    display: flex; /* 2. Flexbox를 사용하겠다고 선언합니다. */
+    justify-content: center; /* 3. 내용물을 수평 중앙 정렬합니다. */
+    align-items: center; /* 4. 내용물을 수직 중앙 정렬합니다. */
+}
+
+.screen .label-2 {
+    /* 기존의 left, top, position 속성을 모두 지우고 아래와 같이 수정합니다. */
+    align-items: center;
+    display: inline-flex;
+    gap: 8px;
+    position: relative; /* position은 남겨두어도 괜찮습니다. */
+}
+
+.screen .text-wrapper-2 {
+    color: #000000;
+    font-family: "Inter-Medium", Helvetica;
+    font-size: 14px;
+    font-weight: 500;
+    letter-spacing: 0;
+    line-height: 19.6px;
+    margin-top: -1.00px;
+    position: relative;
+    white-space: nowrap;
+    width: fit-content;
+}
+
+.screen .by-clicking-continue {
+    align-self: stretch;
+    color: transparent;
+    font-family: "Inter-Regular", Helvetica;
+    font-size: 12px;
+    font-weight: 400;
+    letter-spacing: 0;
+    line-height: 18px;
+    position: relative;
+    text-align: center;
+}
+
+.screen .span {
+    color: #828282;
+}
+
+.screen .text-wrapper-3 {
+    color: #000000;
+}
+
+.screen .text-wrapper-4 {
+    color: #000000;
+    font-family: "Inter-SemiBold", Helvetica;
+    font-size: 36px;
+    font-weight: 600;
+    height: 54px;
+    left: 119px;
+    letter-spacing: -0.36px;
+    line-height: 54px;
+    position: absolute;
+    text-align: center;
+    top: 162px;
+    white-space: nowrap;
+}

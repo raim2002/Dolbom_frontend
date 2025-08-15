@@ -1,0 +1,173 @@
+/* src/pages/SignUpPage2/SignUpPage2.css */
+.element {
+    align-items: start;
+    background-color: #f0f2f5; /* 배경색 회색으로 유지 */
+    display: grid;
+    justify-items: center;
+    width: 100vw;
+    min-height: 100vh;
+    align-items: center;
+}
+
+.element .div {
+    background-color: #ffffff;
+    height: 917px;
+    position: relative;
+    width: 412px;
+}
+
+.element .buttons {
+    height: 565px;
+    left: 18px;
+    position: absolute;
+    top: 208px;
+    width: 375px;
+}
+
+.element .overlap-group {
+    height: 481px;
+    left: 0;
+    position: absolute;
+    top: 0;
+    width: 375px;
+}
+
+.element .field,
+.element .label-wrapper,
+.element .div-wrapper,
+.element .field-2 {
+    display: flex;
+    align-items: center;
+    background-color: #ffffff;
+    border: 1px solid;
+    border-color: #dfdfdf;
+    border-radius: 8px;
+    gap: 16px;
+    height: 40px;
+    padding: 8px 16px;
+    width: 327px;
+    box-sizing: border-box; /* 너비 문제 방지 */
+    position: absolute;
+}
+
+.element .field {
+    left: 24px;
+    top: 327px;
+}
+
+.element .label-wrapper {
+    left: 24px;
+    top: 391px;
+}
+
+.element .label {
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 1;
+    color: #828282;
+    display: -webkit-box;
+    flex: 1;
+    font-family: "Inter-Regular", Helvetica;
+    font-size: 14px;
+    font-weight: 400;
+    letter-spacing: 0;
+    line-height: 19.6px;
+    overflow: hidden;
+    position: relative;
+    text-overflow: ellipsis;
+}
+
+.element .content {
+    align-items: center;
+    display: inline-flex;
+    flex-direction: column;
+    gap: 24px;
+    height: 481px;
+    left: 0;
+    padding: 0px 24px;
+    position: absolute;
+    top: 0;
+}
+
+.element .input-button {
+    align-items: flex-start;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    height: 427px;
+    position: relative;
+    width: 327px;
+}
+
+.element .div-wrapper {
+    position: relative;
+    width: 100%;
+}
+
+.element .field-2 {
+    position: relative;
+    width: 100%;
+}
+
+.element .button {
+    all: unset;
+    background-color: #000000; /* 최종 '가입하기' 버튼은 활성화된 검은색으로 */
+    color: #ffffff;
+    border-radius: 8px;
+    box-sizing: border-box;
+    height: 40px;
+    left: 24px;
+    position: absolute;
+    top: 525px;
+    width: 327px;
+    display: flex; /* 내부 글자 중앙 정렬 */
+    justify-content: center; /* 내부 글자 중앙 정렬 */
+    align-items: center; /* 내부 글자 중앙 정렬 */
+}
+
+.element .label-2 {
+    display: inline-flex;
+    gap: 8px;
+    position: relative;
+}
+
+.element .text-wrapper {
+    color: #ffffff;
+    font-family: "Inter-Medium", Helvetica;
+    font-size: 14px;
+    font-weight: 500;
+    letter-spacing: 0;
+    line-height: 19.6px;
+    position: relative;
+    white-space: nowrap;
+    width: fit-content;
+}
+
+.element .text-wrapper-2 {
+    color: #000000;
+    font-family: "Inter-Medium", Helvetica;
+    font-size: 13px;
+    font-weight: 500;
+    height: 20px;
+    left: 42px; /* 위치 조정 */
+    letter-spacing: -0.13px;
+    line-height: 19.5px;
+    position: absolute;
+    text-align: center;
+    top: 113px;
+    white-space: nowrap;
+}
+
+.element .text-wrapper-3 {
+    color: #000000;
+    font-family: "Inter-SemiBold", Helvetica;
+    font-size: 24px;
+    font-weight: 600;
+    height: 36px;
+    left: 42px;
+    letter-spacing: -0.24px;
+    line-height: 36px;
+    position: absolute;
+    text-align: center;
+    top: 70px;
+    white-space: nowrap;
+}
