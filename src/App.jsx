@@ -8,6 +8,7 @@ import LoginPage from './pages/LoginPage/LoginPage';
 import SignUpPage1 from './pages/SignUpPage1/SignUpPage1';
 import SignUpPage2 from './pages/SignUpPage2/SignUpPage2';
 import DashboardPage from './pages/DashboardPage/DashboardPage';
+import TestPage from './pages/TestPage/TestPage'; // TestPage 추가
 
 function App() {
   return (
@@ -21,6 +22,7 @@ function App() {
       <Route path="/signup-info" element={<SignUpPage2 />} />
       {/* 주소가 '/dashboard' 이면 DashboardPage를 보여줍니다. */}
       <Route path="/dashboard" element={<DashboardPage />} />
+      <Route path="/test" element={<TestPage />} /> {/* TestPage 추가 */}
     </Routes>
   )
 }

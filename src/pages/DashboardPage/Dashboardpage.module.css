@@ -145,3 +145,27 @@
     top: 327px;
     width: 185px;
 }
+
+
+/* 센서 값 스타일 */
+.value {
+  position: absolute;
+  top: 50px; /* 라벨 아래에 위치 */
+  left: 20px;
+  font-size: 24px;
+  font-weight: 600;
+  color: #000000;
+  margin: 0;
+}
+
+/* 활동 점수 스타일 */
+.score {
+  position: absolute;
+  top: 40px; /* 라벨 아래에 위치 */
+  width: 100%;
+  text-align: center;
+  font-size: 48px;
+  font-weight: 700;
+  color: var(--iris-100); /* styleguide에 있는 변수 사용 */
+  margin: 0;
+}
