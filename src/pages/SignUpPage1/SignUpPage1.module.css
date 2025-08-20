@@ -184,3 +184,27 @@
   text-decoration: none; /* Removes underline from the link */
   width: 100%;
 }
+
+/* 입력 필드와 에러 메시지를 묶는 그룹 */
+.inputGroup {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+/* 에러 메시지 스타일 */
+.errorMessage {
+  color: #e53e3e; /* 눈에 띄는 빨간색 */
+  font-size: 12px;
+  font-weight: 500;
+  margin-top: 4px;
+  /* 메시지가 없을 때도 공간을 차지해 레이아웃이 흔들리지 않도록 높이를 고정합니다. */
+  height: 14px; 
+}
+
+/* 버튼이 비활성화 상태일 때의 스타일 */
+.button:disabled {
+  background-color: #eeeeee; /* 회색 배경 */
+  color: #a0a0a0; /* 흐린 글자색 */
+  cursor: not-allowed; /* 클릭할 수 없다는 커서 모양 */
+}

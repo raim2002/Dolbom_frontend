@@ -1,18 +1,17 @@
 // src/pages/SignUpPage2/SignUpPage2.jsx
 
 import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
+// --- 1. "router-dom" -> "react-router-dom"으로 수정 ---
+import { useNavigate } from "react-router-dom"; 
 import axios from "axios";
 import styles from "./SignUpPage2.module.css";
-import useSignUpStore from "../../store/useSignUpStore"; // 중앙 보관소 불러오기
+import useSignUpStore from "../../store/useSignUpStore";
 
 const SignUpPage2 = () => {
   const navigate = useNavigate();
-  
-  // 1. 중앙 보관소에서 이메일, 비밀번호, 데이터 초기화 함수를 가져옵니다.
-  const { email, password, reset } = useSignUpStore();
+  const { phoneNumber, email, password, reset } = useSignUpStore();
 
-  // 2. 현재 페이지의 입력값을 위한 로컬 State 변수들
+  // --- 입력값을 위한 State ---
   const [name, setName] = useState("");
   const [age, setAge] = useState("");
   const [height, setHeight] = useState("");
@@ -21,15 +20,59 @@ const SignUpPage2 = () => {
   const [streetAddress, setStreetAddress] = useState("");
   const [detailAddress, setDetailAddress] = useState("");
 
-  // '가입하기' 버튼 클릭 시 실행될 함수
-  const handleSignUp = async () => {
-    if (!name || !age || !height || !weight || !streetAddress || !detailAddress) {
-      alert("모든 필수 항목을 입력해주세요.");
-      return;
-    }
+  // --- 에러 메시지를 위한 State ---
+  const [nameError, setNameError] = useState("");
+  const [ageError, setAgeError] = useState("");
+  const [heightError, setHeightError] = useState("");
+  const [weightError, setWeightError] = useState("");
+  const [addressError, setAddressError] = useState("");
 
-    // 3. 백엔드의 SignUpRequestDto 양식에 맞춰 모든 데이터를 하나의 객체로 합칩니다.
+  // --- 유효성 검사 함수들 ---
+  const validateName = (value) => {
+    if (!value) {
+      setNameError("이름을 입력해주세요.");
+      return false;
+    }
+    setNameError("");
+    return true;
+  };
+
+  const validateNumberField = (value, fieldName, setError) => {
+    if (!value) {
+      setError(`${fieldName}을(를) 입력해주세요.`);
+      return false;
+    }
+    if (isNaN(value) || Number(value) <= 0) {
+      setError(`유효한 ${fieldName}을(를) 입력해주세요.`);
+      return false;
+    }
+    setError("");
+    return true;
+  };
+
+  const validateAddress = (street, detail) => {
+    if (!street || !detail) {
+      setAddressError("주소를 모두 입력해주세요.");
+      return false;
+    }
+    setAddressError("");
+    return true;
+  };
+
+  const handleSignUp = async () => {
+    // --- '가입하기' 버튼 클릭 시 최종 유효성 검사 ---
+    const isNameValid = validateName(name);
+    const isAgeValid = validateNumberField(age, "나이", setAgeError);
+    const isHeightValid = validateNumberField(height, "키", setHeightError);
+    const isWeightValid = validateNumberField(weight, "몸무게", setWeightError);
+    const isAddressValid = validateAddress(streetAddress, detailAddress);
+
+    if (!isNameValid || !isAgeValid || !isHeightValid || !isWeightValid || !isAddressValid) {
+      return; // 하나라도 유효하지 않으면 전송 중단
+    }
+    
     const finalSignUpData = {
+      phoneNumber: phoneNumber,
       email: email,
       password: password,
       patientName: name,
@@ -41,24 +84,18 @@ const SignUpPage2 = () => {
       detailAddress: detailAddress,
     };
 
-    console.log("백엔드로 전송할 최종 데이터:", finalSignUpData);
-
     try {
-      // 4. 백엔드의 /api/auth/signup 주소로 최종 데이터를 전송합니다.
       const response = await axios.post(
         "http://localhost:8080/api/auth/signup",
         finalSignUpData
       );
-
       console.log("회원가입 성공:", response.data);
       alert("회원가입이 성공적으로 완료되었습니다!");
-      
-      reset(); // 5. 회원가입이 끝났으니 중앙 보관소의 데이터를 깨끗하게 비웁니다.
-      navigate("/"); // 로그인 페이지로 이동
-
+      reset(); 
+      navigate("/");
     } catch (error) {
       console.error("회원가입 실패:", error);
-      alert("회원가입에 실패했습니다. (예: 이미 가입된 이메일)");
+      alert("회원가입에 실패했습니다. 입력 정보를 다시 확인해주세요.");
     }
   };
 
@@ -68,37 +105,37 @@ const SignUpPage2 = () => {
         <div className={styles['text-wrapper-3']}>회원가입</div>
         <div className={styles['text-wrapper-2']}>사용자 정보를 입력해주세요</div>
 
-        <div className={styles.buttons}>
-          <div className={styles['overlap-group']}>
-            <div className={styles.content}>
-              <div className={styles['input-button']}>
-                <div className={styles['div-wrapper']}>
-                   <input type="text" placeholder="피보호자 이름" className={styles.inputElement} value={name} onChange={(e) => setName(e.target.value)} />
-                </div>
-                <div className={styles['field-2']}>
-                   <input type="number" placeholder="나이" className={styles.inputElement} value={age} onChange={(e) => setAge(e.target.value)} />
-                </div>
-                <div className={styles['field-2']}>
-                   <input type="number" placeholder="키" className={styles.inputElement} value={height} onChange={(e) => setHeight(e.target.value)} />
-                </div>
-                <div className={styles['field-2']}>
-                   <input type="number" placeholder="몸무게" className={styles.inputElement} value={weight} onChange={(e) => setWeight(e.target.value)} />
-                </div>
-                <div className={styles['field-2']}>
-                   <input type="text" placeholder="기저 질환 (없으면 비워두세요)" className={styles.inputElement} value={condition} onChange={(e) => setCondition(e.target.value)} />
-                </div>
-              </div>
-            </div>
-             <div className={styles.field}>
-               <input type="text" placeholder="도로명 주소" className={styles.inputElement} value={streetAddress} onChange={(e) => setStreetAddress(e.target.value)} />
-            </div>
-            <div className={styles['label-wrapper']}>
-               <input type="text" placeholder="상세 주소" className={styles.inputElement} value={detailAddress} onChange={(e) => setDetailAddress(e.target.value)} />
-            </div>
+        <div className={styles.formContainer}>
+          {/* --- 각 입력창에 실시간 유효성 검사 적용 --- */}
+          <div className={styles.inputGroup}>
+            <input type="text" placeholder="피보호자 이름" className={styles.inputElement} value={name} onChange={(e) => {setName(e.target.value); validateName(e.target.value);}} />
+            {nameError && <p className={styles.errorMessage}>{nameError}</p>}
           </div>
-          
+          <div className={styles.inputGroup}>
+            <input type="number" placeholder="나이" className={styles.inputElement} value={age} onChange={(e) => {setAge(e.target.value); validateNumberField(e.target.value, "나이", setAgeError);}} />
+            {ageError && <p className={styles.errorMessage}>{ageError}</p>}
+          </div>
+          <div className={styles.inputGroup}>
+            <input type="number" placeholder="키" className={styles.inputElement} value={height} onChange={(e) => {setHeight(e.target.value); validateNumberField(e.target.value, "키", setHeightError);}} />
+            {heightError && <p className={styles.errorMessage}>{heightError}</p>}
+          </div>
+          <div className={styles.inputGroup}>
+            <input type="number" placeholder="몸무게" className={styles.inputElement} value={weight} onChange={(e) => {setWeight(e.target.value); validateNumberField(e.target.value, "몸무게", setWeightError);}} />
+            {weightError && <p className={styles.errorMessage}>{weightError}</p>}
+          </div>
+          <div className={styles.inputGroup}>
+            <input type="text" placeholder="기저 질환 (없으면 비워두세요)" className={styles.inputElement} value={condition} onChange={(e) => setCondition(e.target.value)} />
+          </div>
+          <div className={styles.inputGroup}>
+            <input type="text" placeholder="도로명 주소" className={styles.inputElement} value={streetAddress} onChange={(e) => {setStreetAddress(e.target.value); validateAddress(e.target.value, detailAddress);}} />
+          </div>
+          <div className={styles.inputGroup}>
+            <input type="text" placeholder="상세 주소" className={styles.inputElement} value={detailAddress} onChange={(e) => {setDetailAddress(e.target.value); validateAddress(streetAddress, e.target.value);}} />
+            {addressError && <p className={styles.errorMessage}>{addressError}</p>}
+          </div>
+
           <button className={styles.button} onClick={handleSignUp}>
-              <div className={styles['text-wrapper']}>가입하기</div>
+            <div className={styles['text-wrapper']}>가입하기</div>
           </button>
         </div>
       </div>

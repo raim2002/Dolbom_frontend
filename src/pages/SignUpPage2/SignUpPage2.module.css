@@ -1,215 +1,108 @@
-/* src/pages/SignUpPage2/SignUpPage2.css */
+/* src/pages/SignUpPage2/SignUpPage2.module.css */
 .element {
-    align-items: start;
-    background-color: #f0f2f5; /* 배경색 회색으로 유지 */
-    display: grid;
-    justify-items: center;
-    width: 100vw;
-    min-height: 100vh;
-    align-items: center;
+  align-items: start;
+  background-color: #f0f2f5;
+  display: grid;
+  justify-items: center;
+  width: 100vw;
+  min-height: 100vh;
+  align-items: center;
 }
 
 .element .div {
-    background-color: #ffffff;
-    height: 917px;
-    position: relative;
-    width: 412px;
+  background-color: #ffffff;
+  height: 917px;
+  position: relative;
+  width: 412px;
 }
 
-.element .buttons {
-    height: 565px;
-    left: 18px;
-    position: absolute;
-    top: 208px;
-    width: 375px;
+/* --- 1. 모든 입력창과 버튼을 담는 컨테이너 스타일 --- */
+.formContainer {
+  position: absolute;
+  top: 208px; /* 페이지 상단에서의 위치 */
+  left: 50%; /* 가운데 정렬을 위한 준비 */
+  transform: translateX(-50%); /* 가운데 정렬 완료 */
+  width: 327px; /* 전체 폼의 너비 */
+  
+  display: flex;
+  flex-direction: column; /* 자식 요소들을 세로로 쌓음 */
+  gap: 12px; /* 각 입력창 사이의 간격 */
 }
 
-.element .overlap-group {
-    height: 481px;
-    left: 0;
-    position: absolute;
-    top: 0;
-    width: 375px;
+/* --- 2. 입력창 그룹 스타일 (에러 메시지 포함) --- */
+.inputGroup {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
 }
 
-.element .field,
-.element .label-wrapper,
-.element .div-wrapper,
-.element .field-2 {
-    display: flex;
-    align-items: center;
-    background-color: #ffffff;
-    border: 1px solid;
-    border-color: #dfdfdf;
-    border-radius: 8px;
-    gap: 16px;
-    height: 40px;
-    padding: 8px 16px;
-    width: 327px;
-    box-sizing: border-box; /* 너비 문제 방지 */
-    position: absolute;
-}
-
-.element .field {
-    left: 24px;
-    top: 327px;
-}
-
-.element .label-wrapper {
-    left: 24px;
-    top: 391px;
-}
-
-.element .label {
-    -webkit-box-orient: vertical;
-    -webkit-line-clamp: 1;
-    color: #828282;
-    display: -webkit-box;
-    flex: 1;
-    font-family: "Inter-Regular", Helvetica;
-    font-size: 14px;
-    font-weight: 400;
-    letter-spacing: 0;
-    line-height: 19.6px;
-    overflow: hidden;
-    position: relative;
-    text-overflow: ellipsis;
-}
-
-.element .content {
-    align-items: center;
-    display: inline-flex;
-    flex-direction: column;
-    gap: 24px;
-    height: 481px;
-    left: 0;
-    padding: 0px 24px;
-    position: absolute;
-    top: 0;
-}
-
-.element .input-button {
-    align-items: flex-start;
-    display: flex;
-    flex-direction: column;
-    gap: 16px;
-    height: 427px;
-    position: relative;
-    width: 327px;
-}
-
-.element .div-wrapper {
-    position: relative;
-    width: 100%;
-}
-
-.element .field-2 {
-    position: relative;
-    width: 100%;
-}
-
-.element .button {
-    all: unset;
-    background-color: #000000; /* 최종 '가입하기' 버튼은 활성화된 검은색으로 */
-    color: #ffffff;
-    border-radius: 8px;
-    box-sizing: border-box;
-    height: 40px;
-    left: 24px;
-    position: absolute;
-    top: 525px;
-    width: 327px;
-    display: flex; /* 내부 글자 중앙 정렬 */
-    justify-content: center; /* 내부 글자 중앙 정렬 */
-    align-items: center; /* 내부 글자 중앙 정렬 */
-}
-
-.element .label-2 {
-    display: inline-flex;
-    gap: 8px;
-    position: relative;
-}
-
-.element .text-wrapper {
-    color: #ffffff;
-    font-family: "Inter-Medium", Helvetica;
-    font-size: 14px;
-    font-weight: 500;
-    letter-spacing: 0;
-    line-height: 19.6px;
-    position: relative;
-    white-space: nowrap;
-    width: fit-content;
-}
-
-.element .text-wrapper-2 {
-    color: #000000;
-    font-family: "Inter-Medium", Helvetica;
-    font-size: 13px;
-    font-weight: 500;
-    height: 20px;
-    left: 42px; /* 위치 조정 */
-    letter-spacing: -0.13px;
-    line-height: 19.5px;
-    position: absolute;
-    text-align: center;
-    top: 113px;
-    white-space: nowrap;
-}
-
-.element .text-wrapper-3 {
-    color: #000000;
-    font-family: "Inter-SemiBold", Helvetica;
-    font-size: 24px;
-    font-weight: 600;
-    height: 36px;
-    left: 42px;
-    letter-spacing: -0.24px;
-    line-height: 36px;
-    position: absolute;
-    text-align: center;
-    top: 70px;
-    white-space: nowrap;
-}
-
+/* --- 3. 실제 input 태그 스타일 (기존 field, div-wrapper 등을 통합) --- */
 .inputElement {
   width: 100%;
-  height: 100%;
-  border: none;
-  outline: none;
-  background-color: transparent;
+  height: 40px;
+  padding: 8px 16px;
+  border: 1px solid #dfdfdf;
+  border-radius: 8px;
+  box-sizing: border-box;
   font-family: "Inter-Regular", Helvetica;
   font-size: 14px;
-  padding: 0;
-  margin: 0;
 }
 
-.link {
-  text-decoration: none; /* 링크의 밑줄 제거 */
-  width: 327px;
-  position: absolute;
-  left: 24px;
-  top: 525px;
+.inputElement::placeholder {
+  color: #828282;
 }
 
-/* 기존 button 스타일에서 위치값(left, top) 제거 */
+/* --- 4. 가입하기 버튼 스타일 --- */
 .button {
-    all: unset;
-    background-color: #000000;
-    color: #ffffff;
-    border-radius: 8px;
-    box-sizing: border-box;
-    height: 40px;
-    width: 100%; /* 너비를 100%로 설정 */
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    cursor: pointer;
+  all: unset;
+  background-color: #000000;
+  color: #ffffff;
+  border-radius: 8px;
+  box-sizing: border-box;
+  height: 40px;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  margin-top: 24px; /* 마지막 입력창과의 간격 */
 }
 
-/* label-2는 더 이상 버튼 중앙 정렬에 필요 없으므로 제거해도 괜찮습니다. */
-.label-2 {
-    display: inline-flex;
-    gap: 8px;
-    position: relative;
+.text-wrapper {
+  color: #ffffff;
+  font-family: "Inter-Medium", Helvetica;
+  font-size: 14px;
+  font-weight: 500;
 }
+
+/* --- 5. 상단 타이틀 텍스트 스타일 --- */
+.text-wrapper-2 {
+  color: #000000;
+  font-family: "Inter-Medium", Helvetica;
+  font-size: 13px;
+  position: absolute;
+  left: 42px;
+  top: 113px;
+}
+
+.text-wrapper-3 {
+  color: #000000;
+  font-family: "Inter-SemiBold", Helvetica;
+  font-size: 24px;
+  font-weight: 600;
+  position: absolute;
+  left: 42px;
+  top: 70px;
+}
+
+/* --- 6. 에러 메시지 스타일 --- */
+.errorMessage {
+  color: #e53e3e;
+  font-size: 12px;
+  font-weight: 500;
+  margin-top: 4px;
+  height: 14px;
+}
+
+/* --- 사용되지 않는 기존 클래스들은 제거해도 됩니다 --- */
+/* .buttons, .overlap-group, .content, .input-button, .field, .label-wrapper, .field-2, .div-wrapper 등 */

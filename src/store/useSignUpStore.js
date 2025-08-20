@@ -2,9 +2,9 @@
 
 import { create } from 'zustand';
 
-// 회원가입 데이터를 보관할 보관소(store)를 만듭니다.
 const useSignUpStore = create((set) => ({
-  // 1. 보관할 데이터들
+  // 1. phoneNumber를 email 위에 추가
+  phoneNumber: '',
   email: '',
   password: '',
   name: '',
@@ -14,7 +14,8 @@ const useSignUpStore = create((set) => ({
   condition: '',
   address: '',
 
-  // 2. 데이터를 수정하는 함수들
+  // 2. setPhoneNumber 함수 추가
+  setPhoneNumber: (phone) => set({ phoneNumber: phone }),
   setEmail: (email) => set({ email: email }),
   setPassword: (password) => set({ password: password }),
   setUserInfo: (userInfo) => set({
@@ -26,8 +27,9 @@ const useSignUpStore = create((set) => ({
     address: userInfo.address,
   }),
   
-  // 3. 모든 데이터를 초기화하는 함수
+  // 3. reset 함수에 phoneNumber 초기화 추가
   reset: () => set({
+    phoneNumber: '',
     email: '',
     password: '',
     name: '',
