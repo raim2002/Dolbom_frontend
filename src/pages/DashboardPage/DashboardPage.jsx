@@ -2,24 +2,23 @@
 
 import React, { useState, useEffect } from "react";
 import styles from "./DashboardPage.module.css";
-import axios from 'axios'; // --- 1. axios import 주석 해제 ---
+import axios from 'axios';
 
 const DashboardPage = () => {
     const [sensorData, setSensorData] = useState(null);
 
     useEffect(() => {
         const fetchData = async () => {
-            // --- 2. 실제 API 호출 로직으로 수정 ---
             try {
-                // 로컬 스토리지에서 토큰을 가져옵니다. (로그인 시 저장되어 있어야 함)
                 const token = localStorage.getItem('accessToken');
-                const patientId = 1; // 테스트할 피보호자 ID
+                const patientId = 1;
 
                 const response = await axios.get(
-                    `http://localhost:8080/api/sensor/latest/${patientId}`, // 템플릿 리터럴 사용
+                    `http://localhost:8080/api/sensor/latest/${patientId}`,
                     {
                         headers: {
-                            Authorization: ` ${token}` // Bearer 접두사를 포함하여 토큰 전송
+                            // ✅ 수정 1: 토큰 앞에 불필요한 공백 제거
+                            Authorization: token
                         }
                     }
                 );
@@ -27,31 +26,30 @@ const DashboardPage = () => {
                 const responseData = response.data;
                 console.log("서버로부터 받은 데이터:", responseData);
 
-                // --- 3. 받은 데이터를 대시보드 UI에 맞게 가공 ---
                 const formattedData = {
                     temperature: responseData.temperature,
                     humidity: responseData.humidity,
                     fineDust: responseData.fineDust,
-                    gas: responseData.vocs > 200 ? "감지" : "정상", // vocs 값에 따라 상태 결정
-                    activityScore: responseData.movementCount, // movementCount를 활동 점수로 매핑
+                    gas: responseData.vocs > 200 ? "감지" : "정상",
+                    activityScore: responseData.movementCount,
                 };
 
-                setSensorData(formattedData); // State에 실제 데이터를 저장합니다.
+                setSensorData(formattedData);
 
             } catch (error) {
                 console.error("대시보드 데이터를 불러오는 데 실패했습니다:", error);
-                // 에러 발생 시 사용자에게 보여줄 수 있는 기본값 설정도 가능합니다.
-                // setSensorData({ temperature: 'N/A', humidity: 'N/A', ... });
             }
         };
 
-        fetchData(); // 함수 실행
+        fetchData(); // 컴포넌트가 처음 로드될 때 한 번 실행
 
-        // 5초마다 데이터를 새로고침하고 싶다면 아래 주석을 해제하세요.
+        // 5초마다 데이터를 새로고침
         const intervalId = setInterval(fetchData, 5000);
-         return () => clearInterval(intervalId);
 
-    }, []);
+        // ✅ 수정 2: 컴포넌트가 사라질 때 setInterval을 정리(cleanup)하여 메모리 누수 방지
+        return () => clearInterval(intervalId);
+
+    }, []); // 의존성 배열이 비어있으므로 이 useEffect는 마운트될 때 한 번만 실행됩니다.
 
     if (!sensorData) {
         return <div className={styles.screen}><h1>데이터를 불러오는 중...</h1></div>;
