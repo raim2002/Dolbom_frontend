@@ -1,57 +1,83 @@
 // src/pages/DashboardPage/DashboardPage.jsx
 
 import React, { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom"; // useNavigate import
 import styles from "./DashboardPage.module.css";
 import axios from 'axios';
 
 const DashboardPage = () => {
+    const navigate = useNavigate(); // 페이지 이동을 위한 navigate 함수
+
+    // 1. 데이터를 두 개의 State로 분리하여 관리합니다.
     const [sensorData, setSensorData] = useState(null);
+    const [activityScore, setActivityScore] = useState(null);
 
     useEffect(() => {
         const fetchData = async () => {
             try {
                 const token = localStorage.getItem('accessToken');
-                const patientId = 1;
+                const patientId = 1; // 테스트용 피보호자 ID
 
-                const response = await axios.get(
+                // 2. 두 개의 API를 동시에 호출합니다.
+                const sensorPromise = axios.get(
                     `http://localhost:8080/api/sensor/latest/${patientId}`,
-                    {
-                        headers: {
-                            // ✅ 수정 1: 토큰 앞에 불필요한 공백 제거
-                            Authorization: token
-                        }
-                    }
+                    { headers: { Authorization: ` ${token}` } }
+                );
+                const scorePromise = axios.get(
+                    `http://localhost:8080/api/sensor/activity-score/${patientId}`,
+                    { headers: { Authorization: ` ${token}` } }
                 );
 
-                const responseData = response.data;
-                console.log("서버로부터 받은 데이터:", responseData);
+                // Promise.all을 사용해 두 요청이 모두 끝날 때까지 기다립니다.
+                const [sensorResponse, scoreResponse] = await Promise.all([sensorPromise, scorePromise]);
 
-                const formattedData = {
-                    temperature: responseData.temperature,
-                    humidity: responseData.humidity,
-                    fineDust: responseData.fineDust,
-                    gas: responseData.vocs > 200 ? "감지" : "정상",
-                    activityScore: responseData.movementCount,
+                // 3. 첫 번째 API 응답 (센서 데이터) 처리
+                const sensorResult = sensorResponse.data;
+                const formattedSensorData = {
+                    temperature: sensorResult.temperature,
+                    humidity: sensorResult.humidity,
+                    fineDust: sensorResult.fineDust,
+                    gas: sensorResult.vocs > 200 ? "감지" : "정상",
                 };
+                setSensorData(formattedSensorData);
 
-                setSensorData(formattedData);
+                // 4. 두 번째 API 응답 (활동 점수) 처리
+                const scoreResult = scoreResponse.data;
+                setActivityScore(scoreResult);
+
+                // 5. 활동 점수가 10점 이하일 경우 경고창을 띄웁니다.
+                if (scoreResult <= 10) {
+                    window.alert("경고: 오늘의 활동 점수가 매우 낮습니다! 확인이 필요합니다.");
+                }
 
             } catch (error) {
                 console.error("대시보드 데이터를 불러오는 데 실패했습니다:", error);
             }
         };
 
-        fetchData(); // 컴포넌트가 처음 로드될 때 한 번 실행
+        fetchData();
 
         // 5초마다 데이터를 새로고침
         const intervalId = setInterval(fetchData, 5000);
-
-        // ✅ 수정 2: 컴포넌트가 사라질 때 setInterval을 정리(cleanup)하여 메모리 누수 방지
         return () => clearInterval(intervalId);
 
-    }, []); // 의존성 배열이 비어있으므로 이 useEffect는 마운트될 때 한 번만 실행됩니다.
+    }, []);
 
-    if (!sensorData) {
+    // 버튼 클릭 시 동작할 함수
+    const handleButtonClick = () => {
+        // 활동 점수가 10점 이하일 때만 다른 URL로 이동
+        if (activityScore !== null && activityScore <= 10) {
+            // 예시: 긴급 상황 프로토콜 페이지로 이동
+            navigate("/emergency"); 
+        } else {
+            // 평상시에는 다른 기능 수행 (예: 로봇 제어 페이지)
+            console.log("일반 버튼 기능 수행");
+            // navigate("/robot-control");
+        }
+    };
+
+    // 데이터 로딩 중 화면
+    if (!sensorData || activityScore === null) {
         return <div className={styles.screen}><h1>데이터를 불러오는 중...</h1></div>;
     }
 
@@ -72,12 +98,17 @@ const DashboardPage = () => {
                         <div className={styles.label}>습도</div>
                         <p className={styles.value}>{sensorData.humidity} %</p>
                     </div>
-                    <button className={styles['field-2']}>
-                        <div className={styles['text-wrapper-2']}>버튼</div>
+                    {/* 6. 버튼에 onClick 이벤트 핸들러를 연결합니다. */}
+                    <button className={styles['field-2']} onClick={handleButtonClick}>
+                        <div className={styles['text-wrapper-2']}>
+                            {/* 점수가 낮으면 버튼 텍스트 변경 */}
+                            {activityScore <= 10 ? "긴급 확인" : "로봇 제어"}
+                        </div>
                     </button>
                     <div className={styles['field-3']}>
                         <div className={styles['label-2']}>오늘의 활동 점수</div>
-                        <p className={styles.score}>{sensorData.activityScore} 점</p>
+                        {/* 활동 점수를 별도 State에서 가져옵니다. */}
+                        <p className={styles.score}>{activityScore} 점</p>
                     </div>
                     <div className={styles['field-4']}>
                         <div className={styles.label}>가스</div>
